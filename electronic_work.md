@@ -1,3 +1,12 @@
+# Electronic work presentation 
+
+This document is a presentation that I keep for myself to remember what I have done, that shows all the electronic work done for the CHIC project. It is some sort of personal documentation, that I try to let clean to illustrate the progress that i am doing. In contains the following sections : 
+1. Setting up ESP8266 with an arduino
+1.1. Home made voltage source
+1.2. Home made USB to TTL cabe (to command the module using arduino's UART from my computer)
+1.3. Setting up server in R-PI for UDP communication
+2. Processing usage within R-PI for image generation
+
 # Wifi module with Arduino and R-PI
 
 The ESP8266 wifi module is a MC that is able to connnect to wifi and to be a wifi routeur. The one that I bought has to be flashed to have some code, and it already has **AT command library**. firmware[a] is a specific class of computer software that provides the low-level control for a device's specific hardware.
@@ -30,7 +39,7 @@ https://www.instructables.com/id/ESP-12E-ESP8266-With-Arduino-Uno-Getting-Connec
 AT Tutorial to connect to internet: https://arduino.stackexchange.com/questions/32567/get-data-from-website-with-esp8266-using-at-commands
 And AT commands tutorial: https://www.esp8266.com/viewtopic.php?f=12&t=13556
 
-# Solution to problem 2
+### Solution to problem 2
 
 So at the end I found proper way to connect to server using the AT example PDF. Properly, I am not flashing the MC but instead I am sending instructions to it.
 
@@ -51,11 +60,11 @@ The setup to use the Arduino board as USB-TTL cable is the following:
 ![](pics/esp8266_setup_1.jpeg)
 
 
-# Problem 3: The web server (UDT protocol connection)
+## Problem 3: The web server (UDT protocol connection)
 
 My first ID was to use a HTTP server (like Python.flask or python.Django) but I think it's better to use low-level protocol like TCP or UDT
 
-## TCP or UDP ?
+### TCP or UDP ?
 
 According to this link: http://www.skullbox.net/tcpudp.php, UDP is faster than TCP. The main difference is that TCP is a protocol that waits for a confirmation of received data every time a package is sent, as UDP is a streaming protocol that keeps sending data even if some error occured during the transmission of previously sent data. In our case, we will want to have streaming of sensed data and we don't care if some data was not sent correctly. Therefore, we will want to use TCP.
 
