@@ -2,9 +2,9 @@
 
 This document is a presentation that I keep for myself to remember what I have done, that shows all the electronic work done for the CHIC project. It is some sort of personal documentation, that I try to let clean to illustrate the progress that i am doing. In contains the following sections : 
 1. Setting up ESP8266 with an arduino
-1.1. Home made voltage source
-1.2. Home made USB to TTL cabe (to command the module using arduino's UART from my computer)
-1.3. Setting up server in R-PI for UDP communication
+    1. Home made voltage source
+    2. Home made USB to TTL cabe (to command the module using arduino's UART from my computer)
+    3. Setting up server in R-PI for UDP communication
 2. Processing usage within R-PI for image generation
 
 # Wifi module with Arduino and R-PI
