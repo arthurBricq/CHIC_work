@@ -31,6 +31,18 @@ And AT commands tutorial: https://www.esp8266.com/viewtopic.php?f=12&t=13556
 
 So at the end I found proper way to connect to server using the AT example PDF. Properly, I am not flashing the MC but instead I am sending instructions to it.
 
+The list of AT Commands to use are the following
+
+```
+AT+CWMODE=3 // Set station mode of the module
+AT+CWJPA="name_of_wifi","password" // Connect to the wifi if that wasn't the case
+AT+CIFSR // Verify that wifi is connected (this gives the IP address of the ESP8266)
+AT+CIPSTART="TCP","192.168.1.37",80 // Connects to the server
+AT+SEND=N // Send n bytes
+> bytes_to_send
+AT+CIPCLOSE // End the connection
+```
+
 
 # Problem 3: The web server (UDT protocol connection)
 
