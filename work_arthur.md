@@ -13,7 +13,9 @@ The second problem is for the current. The wifi module needs that have at maximu
 
 I have found in my stuff Dc-Dc converter that I can use. By using a USB cable, i was able to create a voltage source with high current tolerance which can go up to 4.4 Volts (that's enough for my wifi module) and that is controllable. I will let it at 3.5 volts for now !
 
-Now, I need to start working with the wifi module, which is not going to be easy since I can't flash it... Or I don't know how to do so.
+Now, I need to start working with the wifi module, which is not going to be easy since I can't flash it... Or I don't know how to do so. Let's try some things.
+
+
 
 
 ## Problem 2: Flashing the ESP8266-12F

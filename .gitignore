@@ -1,0 +1,11 @@
+*.md
+!work_arthur.md
+
+*.pdf
+
+*.docx
+*.pptx
+
+programming/
+signals/
+wifiModule/
