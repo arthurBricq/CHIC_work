@@ -1,6 +1,6 @@
-# Electronic work presentation 
+# Electronic work presentation
 
-This document is a presentation that I keep for myself to remember what I have done, that shows all the electronic work done for the CHIC project. It is some sort of personal documentation, that I try to let clean to illustrate the progress that i am doing. In contains the following sections : 
+This document is a presentation that I keep for myself to remember what I have done, that shows all the electronic work done for the CHIC project. It is some sort of personal documentation, that I try to let clean to illustrate the progress that i am doing. In contains the following sections :
 1. Setting up ESP8266 with an arduino
     1. Home made voltage source
     2. Home made USB to TTL cabe (to command the module using arduino's UART from my computer)
@@ -39,21 +39,9 @@ https://www.instructables.com/id/ESP-12E-ESP8266-With-Arduino-Uno-Getting-Connec
 AT Tutorial to connect to internet: https://arduino.stackexchange.com/questions/32567/get-data-from-website-with-esp8266-using-at-commands
 And AT commands tutorial: https://www.esp8266.com/viewtopic.php?f=12&t=13556
 
-### Solution to problem 2
+### Solution to problem 2: connect to wifi with AT Commands and use Arduino to send the instructions.
 
 So at the end I found proper way to connect to server using the AT example PDF. Properly, I am not flashing the MC but instead I am sending instructions to it.
-
-The list of AT Commands to use are the following
-
-```
-AT+CWMODE=3 // Set station mode of the module
-AT+CWJPA="name_of_wifi","password" // Connect to the wifi if that wasn't the case
-AT+CIFSR // Verify that wifi is connected (this gives the IP address of the ESP8266)
-AT+CIPSTART="TCP","192.168.1.37",80 // Connects to the server
-AT+SEND=N // Send n bytes
-> bytes_to_send
-AT+CIPCLOSE // End the connection
-```
 
 The setup to use the Arduino board as USB-TTL cable is the following:
 
@@ -68,9 +56,48 @@ My first ID was to use a HTTP server (like Python.flask or python.Django) but I 
 
 According to this link: http://www.skullbox.net/tcpudp.php, UDP is faster than TCP. The main difference is that TCP is a protocol that waits for a confirmation of received data every time a package is sent, as UDP is a streaming protocol that keeps sending data even if some error occured during the transmission of previously sent data. In our case, we will want to have streaming of sensed data and we don't care if some data was not sent correctly. Therefore, we will want to use TCP.
 
+### Code on the server
+
+Creating an UDP server in python is *extremely simple* and the code to implement it is the following:
 
 
+```python
+#!/usr/bin/env python3
 
+import socket
+
+UDP_IP = "192.168.1.40" # this is the IP of the R-PI
+UDP_PORT = 5005 # This port has to be open, with linux command 'sudo ufw enable 5005'
+
+sock = socket.socket(socket.AF_INET, # Internet
+                     socket.SOCK_DGRAM) # UDP
+
+sock.bind((UDP_IP, UDP_PORT))
+
+while True:
+    data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
+    print("received message:", data.decode())
+
+```
+
+The documentation is accessible at this link: https://wiki.python.org/moin/UdpCommunication
+
+### Commands on the ESP8266
+
+How to send the data (**bytes array**) from the ESP ?
+
+```
+AT+CWMODE=3 // Set station mode of the module
+AT+CWJPA="name_of_wifi","password" // Connect to the wifi if that wasn't the case
+AT+CIFSR // Verify that wifi is connected (this gives the IP address of the ESP8266)
+
+AT+CIPSTART="UDP","192.168.1.40",5005,1112,0 // Connects to the server
+AT+SEND=N // Send n bytes
+> bytes_to_send
+AT+CIPCLOSE=4 // End the connection
+```
+
+Those commands works fine, and their are sent via UART from the arduino. So the next steps are to make sure that it is the arduino itself who is sending those data, and then to try them out from a real sensor to test the actual rate that can be obtained! 
 
 
 # Processing and Arduino
