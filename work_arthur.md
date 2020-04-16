@@ -38,7 +38,7 @@ My first ID was to use a HTTP server (like Python.flask or python.Django) but I 
 
 ## TCP or UDP ?
 
-According to this link: http://www.skullbox.net/tcpudp.php, UDP is faster than TCP
+According to this link: http://www.skullbox.net/tcpudp.php, UDP is faster than TCP. The main difference is that TCP is a protocol that waits for a confirmation of received data every time a package is sent, as UDP is a streaming protocol that keeps sending data even if some error occured during the transmission of previously sent data. In our case, we will want to have streaming of sensed data and we don't care if some data was not sent correctly. Therefore, we will want to use TCP.
 
 
 
