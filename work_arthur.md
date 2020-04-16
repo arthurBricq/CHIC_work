@@ -13,10 +13,11 @@ The second problem is for the current. The wifi module needs that have at maximu
 
 I have found in my stuff Dc-Dc converter that I can use. By using a USB cable, i was able to create a voltage source with high current tolerance which can go up to 4.4 Volts (that's enough for my wifi module) and that is controllable. I will let it at 3.5 volts for now !
 
+Here is the set-up that i did for the DC-DC 5v to 3.3v converter.
+
+![](pics/dcdc_home_made.jpeg)
+
 Now, I need to start working with the wifi module, which is not going to be easy since I can't flash it... Or I don't know how to do so. Let's try some things.
-
-
-
 
 ## Problem 2: Flashing the ESP8266-12F
 
@@ -44,6 +45,10 @@ AT+SEND=N // Send n bytes
 > bytes_to_send
 AT+CIPCLOSE // End the connection
 ```
+
+The setup to use the Arduino board as USB-TTL cable is the following:
+
+![](pics/esp8266_setup_1.jpeg)
 
 
 # Problem 3: The web server (UDT protocol connection)
